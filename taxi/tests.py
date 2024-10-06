@@ -25,7 +25,9 @@ class ManufacturerListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("is_paginated" in response.context)
         self.assertTrue(response.context["is_paginated"] is True)
-        self.assertEqual(len(response.context["manufacturer_list"]), 5)
+        self.assertEqual(
+            len(response.context["manufacturer_list"]), 5
+        )
 
 
 class DriverDetailViewTest(TestCase):
@@ -35,8 +37,12 @@ class DriverDetailViewTest(TestCase):
             username="driver1", license_number="12345XYZ"
         )
         manufacturer = Manufacturer.objects.create(name="Test Manufacturer")
-        Car.objects.create(model="Car1", manufacturer=manufacturer, driver=driver)
-        Car.objects.create(model="Car2", manufacturer=manufacturer, driver=driver)
+        Car.objects.create(
+            model="Car1", manufacturer=manufacturer, driver=driver
+        )
+        Car.objects.create(
+            model="Car2", manufacturer=manufacturer, driver=driver
+        )
 
     def test_view_url_exists_at_desired_location(self):
         driver = Driver.objects.get(username="driver1")
