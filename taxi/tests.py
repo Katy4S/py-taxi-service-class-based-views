@@ -8,7 +8,9 @@ class ManufacturerListViewTest(TestCase):
     def setUpTestData(cls):
         number_of_manufacturers = 13
         for manufacturer_id in range(number_of_manufacturers):
-            Manufacturer.objects.create(name=f"Manufacturer {manufacturer_id}")
+            Manufacturer.objects.create(
+                name=f"Manufacturer {manufacturer_id}"
+            )
 
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get("/manufacturers/")
@@ -29,7 +31,9 @@ class ManufacturerListViewTest(TestCase):
 class DriverDetailViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        driver = Driver.objects.create(username="driver1", license_number="12345XYZ")
+        driver = Driver.objects.create(
+            username="driver1", license_number="12345XYZ"
+        )
         manufacturer = Manufacturer.objects.create(name="Test Manufacturer")
         Car.objects.create(model="Car1", manufacturer=manufacturer, driver=driver)
         Car.objects.create(model="Car2", manufacturer=manufacturer, driver=driver)
@@ -41,13 +45,16 @@ class DriverDetailViewTest(TestCase):
 
     def test_view_url_accessible_by_name(self):
         driver = Driver.objects.get(username="driver1")
-        response = self.client.get(reverse("driver-detail", kwargs={"pk": driver.id}))
+        response = self.client.get(
+            reverse("driver-detail", kwargs={"pk": driver.id})
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_context_contains_cars(self):
         driver = Driver.objects.get(username="driver1")
-        response = self.client.get(reverse("driver-detail", kwargs={"pk": driver.id}))
+        response = self.client.get(
+            reverse("driver-detail", kwargs={"pk": driver.id})
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTrue("driver" in response.context)
         self.assertEqual(response.context["driver"].cars.count(), 2)
-
