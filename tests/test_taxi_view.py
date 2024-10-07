@@ -1,7 +1,12 @@
 from django.test import TestCase
 from django.urls import reverse
-
+import django
 from taxi.models import Manufacturer
+import os
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'taxi_service.settings'
+
+django.setup()
 
 MANUFACTURER_LIST_URL = reverse("taxi:manufacturer-list")
 DRIVER_LIST_URL = reverse("taxi:driver-list")
