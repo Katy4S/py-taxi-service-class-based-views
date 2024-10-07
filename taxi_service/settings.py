@@ -56,7 +56,7 @@ ROOT_URLCONF = "taxi_service.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "taxi/templates"],  # Ensure this path exists
+        "DIRS": [BASE_DIR / "taxi/../templates"],  # Ensure this path exists
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
